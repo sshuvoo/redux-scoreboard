@@ -70,7 +70,8 @@ function scoreReducer(state = initialState, action) {
          if (match.id === action.payload.id) {
             return {
                ...match,
-               score: Number(match.score) + Number(action.payload.value),
+               score:
+                  Number(match.score) + Math.abs(Number(action.payload.value)),
             };
          } else {
             return {
@@ -81,7 +82,8 @@ function scoreReducer(state = initialState, action) {
    } else if (action.type === DECREMENT) {
       return [...state].map((match) => {
          if (match.id === action.payload.id) {
-            const result = Number(match.score) - Number(action.payload.value);
+            const result =
+               Number(match.score) - Math.abs(Number(action.payload.value));
             return {
                ...match,
                score: result >= 0 ? result : 0,
